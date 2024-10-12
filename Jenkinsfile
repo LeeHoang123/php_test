@@ -3,7 +3,9 @@ pipeline {
   stages {
     stage ('Run Docker Compose') {
       steps{
-        sh 'sudo docker-compose up -d'
+        withCredentials([string(credentialsId: '123', variable: 'PASS')]) {
+          sh 'echo $PASS | sudo -S docker-compose up -d'
+        }
       }
     }
   }
