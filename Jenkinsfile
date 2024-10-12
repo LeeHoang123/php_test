@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone mã nguồn từ repository
-                git 'https://github.com/your-repository-url.git'
+                git 'https://github.com/LeeHoang123/php_test.git'
             }
         }
 
