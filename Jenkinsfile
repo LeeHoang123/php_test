@@ -1,30 +1,12 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Clone Repository') {
-            steps {
-                // Clone mã nguồn từ repository
-                git 'https://github.com/LeeHoang123/php_test.git'
-            }
-        }
-
-        stage('Run PHP in Docker') {
-            steps {
-                // Sử dụng Docker để chạy container PHP
-                script {
-                    docker.image('php:8.0-cli').inside {
-                        sh 'php index.php'
-                    }
-                }
-            }
-        }
+  agent {
+    label "docker-agent"
+  }
+  stages {
+    stage ('Run Docker Compose') {
+      steps{
+        sh 'sudo docker-compose up -d'
+      }
     }
-
-    post {
-        always {
-            // Clean up Docker container nếu cần
-            echo 'Pipeline hoàn thành.'
-        }
-    }
+  }
 }
